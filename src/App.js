@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Formulario from "./componentes/Formulario";
 
 const AppContainer = styled.div`
   width: 100vw;
@@ -12,26 +13,11 @@ const FormCentraliza = styled.div`
   width: 100%;
 `
 
-const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  margin-top: 30px;
-`
-
 function App() {
   return (
     <AppContainer>
       <FormCentraliza>
-        <FormContainer>
-          <label>Digite seu Nome:</label>
-          <input type="text" id="nome" placeholder="Digite o seu nome" required></input>
-
-          <label>Informe o seu peso em KG:</label>
-          <input type="number" id="peso" required></input>
-
-          <input type="submit" value="Cadastrar"></input>
-        </FormContainer>
+        <Formulario />
       </FormCentraliza>
     </AppContainer>
   );
