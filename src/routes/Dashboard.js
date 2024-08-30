@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getUsuarios, postConsumoAgua } from "../services/dashboard";
+import UsuariosInfo from "../componentes/UsuariosInfo";
+import FormularioConsumo from "../componentes/FormularioConsumo";
 
 const AppContainer = styled.div`
   width: 100vw;
@@ -21,7 +23,7 @@ const TituloDash = styled.h2`
     font-size: 24px;
     text-align: center;
 `
-const FormularioConsumo = styled.form`
+const Formulario = styled.div`
     margin-top: 10px;
 `;
 
@@ -48,52 +50,19 @@ function Dashboard() {
         <AppContainer>
             <TituloDash>Dashboard dos usuários</TituloDash>
             <ResultadoContainer>
-                {/* { usuarios.length !== 0 ? usuarios.map(usuario => (
-                    <InformacoesContainer>
-                        <p>{usuario.nome}</p>
-                        <p>{usuario.peso}</p>
-                    </InformacoesContainer>
-                )) : null} */}
                 {usuarios.length !== 0 ? usuarios.map(usuario => (
                 <InformacoesContainer key={usuario.id}>
                     <p>Nome: {usuario.nome}</p>
                     <p>Peso: {usuario.peso}kg</p>
-                    <p>Meta do dia: {usuario.meta_diaria}ml</p>
-                    <p>Meta já consumida: {usuario.total_agua_ingerida}ml</p>
-                    <p>Meta restante: {usuario.quantidade_faltante}ml</p>
-                    <p>Chegou na meta hoje? {usuario.quantidade_faltante <= 0 ? 'SIM' : 'NÃO'}</p>
-
-                    <FormularioConsumo onSubmit={(e) => handleSubmit(e, usuario.id)}>
-                        <label>
-                            <input
-                                type="radio"
-                                name={`quantidade-${usuario.id}`}
-                                value={250}
-                                checked={quantidadeAgua === 250}
-                                onChange={(e) => setQuantidadeAgua(parseInt(e.target.value))}
-                            />
-                            Copo pequeno 250ml
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                name={`quantidade-${usuario.id}`}
-                                value={350}
-                                onChange={(e) => setQuantidadeAgua(parseInt(e.target.value))}
-                            />
-                            Copo médio 350ml
-                        </label>
-                        <label>
-                            <input
-                                type="radio"
-                                name={`quantidade-${usuario.id}`}
-                                value={500}
-                                onChange={(e) => setQuantidadeAgua(parseInt(e.target.value))}
-                            />
-                            Garrafa média 500ml
-                        </label>
-                        <button type="submit">Consumir</button>
-                    </FormularioConsumo>
+                    <UsuariosInfo usuario={usuario} />
+                    <Formulario>
+                        <FormularioConsumo 
+                            id_usuario={usuario.id}
+                            quantidadeAgua={quantidadeAgua}
+                            setQuantidadeAgua={setQuantidadeAgua}
+                            handleSubmit={handleSubmit}
+                        />
+                    </Formulario>
                 </InformacoesContainer>
             )) : null}
             </ResultadoContainer>
