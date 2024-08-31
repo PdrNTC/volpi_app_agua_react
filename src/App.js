@@ -6,7 +6,7 @@ const AppContainer = styled.div`
   height: 100vh;
 `
 const FormCentraliza = styled.div`
-  flex: 1; /* Faz o FormWrapper ocupar o espaço restante */
+  flex: 1; /* Faz o Form ocupar o espaço restante */
   display: flex;
   justify-content: center;
   align-items: center;
