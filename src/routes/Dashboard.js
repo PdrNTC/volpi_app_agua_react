@@ -23,13 +23,11 @@ const TituloDash = styled.h2`
     font-size: 24px;
     text-align: center;
 `
-const Formulario = styled.div`
-    margin-top: 10px;
-`;
 
 function Dashboard() {
     const [usuarios, setUsuarios] = useState([])
-    const [quantidadeAgua, setQuantidadeAgua] = useState(250)
+    //const [quantidadeAgua, setQuantidadeAgua] = useState(250)
+    const [quantidadeAgua, setQuantidadeAgua] = useState({}) //Estado para armazenar a quantidade a cada usuário
 
     useEffect(() => {
         fetchUsuarios()
@@ -40,10 +38,23 @@ function Dashboard() {
         setUsuarios(usuariosDaApi)
     }
 
+    //Função para lidar com a quantidade selecionada para o usuário especifico.
+    const handleQuantidadeSelecionada = (id_usuario, quantidade) => {
+        setQuantidadeAgua(prevState => ({
+            ...prevState,
+            [id_usuario]: quantidade 
+        }))
+    }
+
     async function handleSubmit(event, id_usuario) {
         event.preventDefault()
-        await postConsumoAgua(id_usuario, quantidadeAgua)
-        fetchUsuarios() //Recarregar os dados dos usuários após registrar qtd água
+        if (quantidadeAgua[id_usuario]) {
+            await postConsumoAgua(id_usuario, quantidadeAgua[id_usuario])
+            fetchUsuarios() //Recarregar os dados dos usuários após registrar qtd água    
+        } else {
+            alert("É necessário selecionar uma quantidade de água para consumo.")
+        }
+        
     }
 
     return (
@@ -55,14 +66,12 @@ function Dashboard() {
                     <p>Nome: {usuario.nome}</p>
                     <p>Peso: {usuario.peso}kg</p>
                     <UsuariosInfo usuario={usuario} />
-                    <Formulario>
-                        <FormularioConsumo 
-                            id_usuario={usuario.id}
-                            quantidadeAgua={quantidadeAgua}
-                            setQuantidadeAgua={setQuantidadeAgua}
-                            handleSubmit={handleSubmit}
-                        />
-                    </Formulario>
+                    <FormularioConsumo 
+                        id_usuario={usuario.id}
+                        quantidadeAgua={quantidadeAgua[usuario.id] || 0}
+                        setQuantidadeAgua={handleQuantidadeSelecionada}
+                        handleSubmit={handleSubmit}
+                    />
                 </InformacoesContainer>
             )) : null}
             </ResultadoContainer>

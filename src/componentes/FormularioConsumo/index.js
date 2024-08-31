@@ -10,7 +10,7 @@ function FormularioConsumo({ id_usuario, quantidadeAgua, setQuantidadeAgua, hand
                         name={`quantidade-${id_usuario}`}
                         value={250}
                         checked={quantidadeAgua === 250}
-                        onChange={(evento) => setQuantidadeAgua(parseInt(evento.target.value))}
+                        onChange={(evento) => setQuantidadeAgua(id_usuario, parseInt(evento.target.value))}
                     />
                     Copo pequeno 250ml
                 </label>
@@ -22,7 +22,7 @@ function FormularioConsumo({ id_usuario, quantidadeAgua, setQuantidadeAgua, hand
                         name={`quantidade-${id_usuario}`}
                         value={350}
                         checked={quantidadeAgua === 350}
-                        onChange={(evento) => setQuantidadeAgua(parseInt(evento.target.value))}
+                        onChange={(evento) => setQuantidadeAgua(id_usuario, parseInt(evento.target.value))}
                     />
                     Copo médio 350ml
                 </label>
@@ -34,7 +34,7 @@ function FormularioConsumo({ id_usuario, quantidadeAgua, setQuantidadeAgua, hand
                         name={`quantidade-${id_usuario}`}
                         value={500}
                         checked={quantidadeAgua === 500}
-                        onChange={(evento) => setQuantidadeAgua(parseInt(evento.target.value))}
+                        onChange={(evento) => setQuantidadeAgua(id_usuario, parseInt(evento.target.value))}
                     />
                     Garrafa média 500ml
                 </label>
