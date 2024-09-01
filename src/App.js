@@ -8,15 +8,21 @@ const AppContainer = styled.div`
 const FormCentraliza = styled.div`
   flex: 1; /* Faz o Form ocupar o espaço restante */
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
+`
+const TituloHome = styled.h2`
+  font-size: 28px;
+  color: #021526;
 `
 
 function App() {
   return (
     <AppContainer>
       <FormCentraliza>
+        <TituloHome>Cadastrar novo usuário</TituloHome>
         <Formulario />
       </FormCentraliza>
     </AppContainer>

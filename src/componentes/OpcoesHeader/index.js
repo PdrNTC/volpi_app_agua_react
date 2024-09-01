@@ -3,11 +3,12 @@ import styled from "styled-components";
 
 const Opcoes = styled.ul`
     display: flex;
+    list-style: none;
 `
 
 const Opcao = styled.li`
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -18,6 +19,16 @@ const Opcao = styled.li`
     min-width: 120px;
     list-style: none;
     text-decoration: none;
+    color: #021526;
+
+    &:hover {
+        color: #007bff;
+    }
+`
+
+// Criando tag estilizada do Link do react
+const LinkEstilizado = styled(Link)`
+    text-decoration: none;
 `
 
 // Lista com as opções do Header
@@ -27,7 +38,11 @@ function OpcoesHeader() {
     return (
         <Opcoes>
             { textoOpcoes.map( (texto) => (
-               <Link to ={`/${texto.toLowerCase()}`}> <Opcao> <p>{texto}</p> </Opcao> </Link>
+               <LinkEstilizado key={texto} to ={`/${texto.toLowerCase()}`}> 
+                <Opcao> 
+                    <p>{texto}</p> 
+                </Opcao> 
+               </LinkEstilizado>
             ))}
         </Opcoes>
     );
