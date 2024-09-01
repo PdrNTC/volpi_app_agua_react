@@ -32,7 +32,7 @@ const LinkEstilizado = styled(Link)`
 `
 
 // Lista com as opções do Header
-const textoOpcoes = ['DASHBOARD', 'HISTÓRICO'];
+const textoOpcoes = ['DASHBOARD', 'HISTORICO'];
 
 function OpcoesHeader() {
     return (

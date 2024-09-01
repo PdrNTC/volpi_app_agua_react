@@ -6,6 +6,7 @@ import { createGlobalStyle } from 'styled-components';
 import Header from './componentes/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from './routes/Dashboard';
+import Historico from './routes/Historico';
 
 const GlobalStyle = createGlobalStyle `
   body {
@@ -35,6 +36,7 @@ root.render(
       <Header />
       <Routes>
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/historico" element={<Historico/>} />
         <Route path="" element={<App/>} />
       </Routes>
     </BrowserRouter>
