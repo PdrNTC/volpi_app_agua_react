@@ -51,9 +51,11 @@ function HistoricoUsuarios() {
             { historico.length > 0 ? (
                 historico.map((registro, index) => (
                     <RegistroContainer key={index}>
-                        <p>Nome: {registro.nome}</p>
-                        <p>Data: {new Date(registro.data).toLocaleDateString()}</p>
-                        <p>Quantidade de Água Ingerida: {registro.qtd_agua} ml</p>
+                        <p><strong>Nome:</strong> {registro.nome_usuario}</p>
+                        <p><strong>Data:</strong>{new Date(registro.data).toLocaleDateString()}</p>
+                        <p><strong>Meta Diária:</strong>{registro.meta_diaria} ml</p>
+                        <p><strong>Quantidade de Água Ingerida:</strong>{registro.qtd_agua} ml</p>
+                        <p><strong>Quantidade de Água que Falta:</strong>{registro.quantidade_faltante} ml</p>
                         <Separador/>
                     </RegistroContainer>
                 ))
