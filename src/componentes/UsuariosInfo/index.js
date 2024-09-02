@@ -1,11 +1,40 @@
+import styled from "styled-components";
+
+const InfoContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 400px; /* Largura máxima do container */
+`;
+
+const InfoItem = styled.p`
+  font-size: 16px;
+  color: #333;
+  margin-bottom: 10px;
+
+
+  strong {
+    font-weight: 700;
+    color: #007bff; 
+  }
+`;
+
 function UsuariosInfo({ usuario }) {
     return (
-        <div>
-            <p>Meta do dia: {usuario.meta_diaria}ml</p>
-            <p>Meta já consumida: {usuario.total_agua_ingerida}ml</p>
-            <p>Meta restante: {usuario.quantidade_faltante}ml</p>
-            <p>Chegou na meta hoje? {usuario.quantidade_faltante <= 0 ? 'SIM' : 'NÃO'}</p>
-        </div>
+        <InfoContainer>
+            <InfoItem><strong>Nome:</strong> {usuario.nome || "N/A"}</InfoItem>
+            <InfoItem><strong>Peso:</strong> {usuario.peso || "N/A"}kg</InfoItem>
+            <InfoItem><strong>Meta do dia:</strong> {usuario.meta_diaria || 0}ml</InfoItem>
+            <InfoItem><strong>Meta já consumida:</strong> {usuario.total_agua_ingerida || 0}ml</InfoItem>
+            <InfoItem><strong>Meta restante:</strong> {usuario.quantidade_faltante}ml</InfoItem>
+            <InfoItem><strong>Chegou na meta hoje?</strong> {usuario.quantidade_faltante <= 0 ? "SIM" : "NÃO"}</InfoItem>
+        </InfoContainer>
     );
 }
 

@@ -35,8 +35,8 @@ root.render(
     <BrowserRouter>
       <Header />
       <Routes>
-        <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/historico" element={<Historico/>} />
+        <Route path="/dashboard/:id_usuario" element={<Dashboard/>} />
+        <Route path="/historico/:id_usuario" element={<Historico/>} />
         <Route path="" element={<App/>} />
       </Routes>
     </BrowserRouter>

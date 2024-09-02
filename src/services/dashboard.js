@@ -10,11 +10,12 @@ async function getUsuarios() {
 }
 
 //Function para cadastrar consumo de água na api
-async function postConsumoAgua(id_usuario, qtd_ingerida) {
+async function postConsumoAgua(id_usuario, qtd_ingerida, data) {
     try {
         const response = await conexaoAPI.post('/agua_ingerida/', {
             usuario: id_usuario,
             qtd_agua: qtd_ingerida,
+            data: data
         });
         return response.data
     } catch (error) {
@@ -33,9 +34,31 @@ async function postNovoUsuario(nome, peso) {
     }
 }
 
+const normalizarData = (dataString) => {
+    const data = new Date(dataString);
+    // Adiciona a compensação do fuso horário para garantir que a data seja tratada como UTC sem deslocamento
+    const dataUtc = new Date(data.getUTCFullYear(), data.getUTCMonth(), data.getUTCDate());
+    return dataUtc.toISOString().split('T')[0]; // Retorna apenas a parte da data (YYYY-MM-DD)
+  };
+
+async function getDadosUsuario(id_usuario, data) {
+    const dataNormalizada = normalizarData(data)
+    try {
+        const response = await conexaoAPI.get(`/usuarios/${id_usuario}/`, {
+            params: { data: dataNormalizada }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Erro ao obter dados do usuário:", error);
+        throw error;
+    }
+}
+
+
 
 export {
     getUsuarios,
     postConsumoAgua,
     postNovoUsuario,
+    getDadosUsuario,
 }

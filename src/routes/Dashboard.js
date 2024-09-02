@@ -1,82 +1,101 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getUsuarios, postConsumoAgua } from "../services/dashboard";
+import { getDadosUsuario, postConsumoAgua } from "../services/dashboard";
+import { useNavigate, useParams } from "react-router-dom";
 import UsuariosInfo from "../componentes/UsuariosInfo";
 import FormularioConsumo from "../componentes/FormularioConsumo";
 
 const AppContainer = styled.div`
   width: 100vw;
   height: 100vh;
+`;
+
+const InformacoesContainer = styled.div`
+  margin-right: 20px;
+`;
+
+const TituloDash = styled.h2`
+  font-size: 24px;
+  text-align: center;
+`;
+
+const Etiqueta = styled.label`
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #333;
 `
 
-const ResultadoContainer = styled.div`
+const DataContainer = styled.div`
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
 `
 
-const InformacoesContainer = styled.div`
-    margin-right: 20px;
-`
-
-const TituloDash = styled.h2`
-    font-size: 24px;
-    text-align: center;
-`
-
 function Dashboard() {
-    const [usuarios, setUsuarios] = useState([])
-    //const [quantidadeAgua, setQuantidadeAgua] = useState(250)
-    const [quantidadeAgua, setQuantidadeAgua] = useState({}) //Estado para armazenar a quantidade a cada usuário
+  const { id_usuario } = useParams(); // Pegando o ID na URL
+  const [usuario, setUsuario] = useState({});
+  const [data, setData] = useState(new Date().toISOString().split("T")[0]); // Data padrão é a atual
+  const [quantidadeAgua, setQuantidadeAgua] = useState(0);
+  const navigate = useNavigate(); //Hook de navegação
 
-    useEffect(() => {
-        fetchUsuarios()
-    }, [])
+  const normalizarData = (dataString) => {
+    const data = new Date(dataString);
+    const dataUtc = new Date(data.getUTCFullYear(), data.getUTCMonth(), data.getUTCDate());
+    return dataUtc.toISOString().split('T')[0]; // Formata a data como YYYY-MM-DD
+  };
 
-    async function fetchUsuarios() {
-        const usuariosDaApi = await getUsuarios()
-        setUsuarios(usuariosDaApi)
+  useEffect(() => {
+    async function fetchUsuario() {
+      const dados = await getDadosUsuario(id_usuario, normalizarData(data));
+      setUsuario(dados);
     }
 
-    //Função para lidar com a quantidade selecionada para o usuário especifico.
-    const handleQuantidadeSelecionada = (id_usuario, quantidade) => {
-        setQuantidadeAgua(prevState => ({
-            ...prevState,
-            [id_usuario]: quantidade 
-        }))
-    }
+    fetchUsuario();
+  }, [id_usuario, data]); // Reexecuta o useEffect ao mudar a data
 
-    async function handleSubmit(event, id_usuario) {
-        event.preventDefault()
-        if (quantidadeAgua[id_usuario]) {
-            await postConsumoAgua(id_usuario, quantidadeAgua[id_usuario])
-            fetchUsuarios() //Recarregar os dados dos usuários após registrar qtd água    
-        } else {
-            alert("É necessário selecionar uma quantidade de água para consumo.")
-        }
-        
+  const handleSubmit = async (evento) => {
+    evento.preventDefault();
+    const dataNormalizada = normalizarData(data); // Normaliza a data antes de enviar
+    try {
+        await postConsumoAgua(id_usuario, quantidadeAgua, dataNormalizada); // Envia data específica
+        const dadosAtualizados = await getDadosUsuario(id_usuario, dataNormalizada); // Atualiza os dados com base na nova data
+        setUsuario(dadosAtualizados);
+        alert("Consumo registrado com sucesso!");
+    } catch (error) {
+        alert("Erro ao registrar o consumo de água.");
     }
+  };
 
-    return (
-        <AppContainer>
-            <TituloDash>Dashboard dos usuários</TituloDash>
-            <ResultadoContainer>
-                {usuarios.length !== 0 ? usuarios.map(usuario => (
-                <InformacoesContainer key={usuario.id}>
-                    <p>Nome: {usuario.nome}</p>
-                    <p>Peso: {usuario.peso}kg</p>
-                    <UsuariosInfo usuario={usuario} />
-                    <FormularioConsumo 
-                        id_usuario={usuario.id}
-                        quantidadeAgua={quantidadeAgua[usuario.id] || 0}
-                        setQuantidadeAgua={handleQuantidadeSelecionada}
-                        handleSubmit={handleSubmit}
-                    />
-                </InformacoesContainer>
-            )) : null}
-            </ResultadoContainer>
-        </AppContainer>
-    );
+  const irParaHistorico = () => {
+    navigate(`/historico/${id_usuario}`);
+  };
+
+  return (
+    <AppContainer>
+      <TituloDash>Dashboard do usuário: {usuario.nome}</TituloDash>
+      <InformacoesContainer>
+        <DataContainer>
+            <Etiqueta>Selecione uma Data para Consumo</Etiqueta>
+            <input
+                type="date"
+                value={data}
+                onChange={(e) => setData(e.target.value)}
+            />
+        </DataContainer>
+        <UsuariosInfo usuario={usuario} />
+        <FormularioConsumo
+                id_usuario={id_usuario}
+                quantidadeAgua={quantidadeAgua}
+                setQuantidadeAgua={setQuantidadeAgua}
+                handleSubmit={handleSubmit}
+        />
+        <button onClick={irParaHistorico}>Ver Histórico</button>
+      </InformacoesContainer>
+    </AppContainer>
+  );
 }
 
 export default Dashboard;

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useState } from "react";
 import { postNovoUsuario } from "../../services/dashboard";
+import { useNavigate } from "react-router-dom";
 
 const FormContainer = styled.form`
   display: flex;
@@ -58,6 +59,8 @@ function Formulario() {
         peso: ""
     });
 
+    const navigate = useNavigate();
+
     // Função para atualizar o estado quando o usuário digita nos campos
     const handleChange = (evento) => {
         setNovoUsuario({
@@ -69,9 +72,11 @@ function Formulario() {
     // Função para enviar os dados para o backend e cadastrar o usuário
     const handleSubmit = async (evento) => {
         evento.preventDefault();
-        await postNovoUsuario(novoUsuario.nome, novoUsuario.peso);
-        // Pode-se adicionar uma lógica adicional após o cadastro, como limpar o formulário ou exibir uma mensagem de sucesso
-        setNovoUsuario({ nome: "", peso: "" });
+        const usuarioCadastrado = await postNovoUsuario(novoUsuario.nome, novoUsuario.peso);
+        if (usuarioCadastrado) {
+            localStorage.setItem("usuario_id", usuarioCadastrado.id)
+            navigate(`/dashboard/${usuarioCadastrado.id}`);
+        }
     };
 
     return (

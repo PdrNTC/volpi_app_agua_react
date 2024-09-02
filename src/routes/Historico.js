@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import HistoricoUsuarios from "../componentes/HistoricoUsuarios";
+import HistoricoUsuario from "../componentes/HistoricoUsuarios";
 
 const AppContainer = styled.div`
   width: 100vw;
@@ -9,7 +9,7 @@ const AppContainer = styled.div`
 function Historico() {
     return(
         <AppContainer>
-            <HistoricoUsuarios />
+            <HistoricoUsuario />
         </AppContainer>
     )
 }
