@@ -41,6 +41,13 @@ const Texto = styled.p`
   font-weight: 600;
 `
 
+const InputData = styled.input`
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 20px;  
+`
+
 
 function Dashboard() {
   const { id_usuario } = useParams(); // Pegando o ID na URL
@@ -87,11 +94,13 @@ function Dashboard() {
       <InformacoesContainer>
         <DataContainer>
             <Etiqueta>Selecione uma Data para registrar o consumo</Etiqueta>
-            <input
+        </DataContainer>
+        <DataContainer>
+          <InputData
                 type="date"
                 value={data}
                 onChange={(e) => setData(e.target.value)}
-            />
+          />
         </DataContainer>
         <UsuariosInfo usuario={usuario} />
         
