@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import Cadastrar from './routes/Cadastrar';
 import reportWebVitals from './reportWebVitals';
 import { createGlobalStyle } from 'styled-components';
-import Header from './componentes/Header';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Dashboard from './routes/Dashboard';
 import Historico from './routes/Historico';

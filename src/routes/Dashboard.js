@@ -6,8 +6,10 @@ import UsuariosInfo from "../componentes/UsuariosInfo";
 import FormularioConsumo from "../componentes/FormularioConsumo";
 
 const AppContainer = styled.div`
-  width: 100vw;
-  height: 100vh;
+  background-color: #F4EFE0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;
 
 const InformacoesContainer = styled.div`
@@ -32,6 +34,11 @@ const Etiqueta = styled.label`
 const DataContainer = styled.div`
     display: flex;
     justify-content: center;
+`
+
+const Texto = styled.p`
+  text-align: center;
+  font-weight: 600;
 `
 
 
@@ -79,7 +86,7 @@ function Dashboard() {
       <TituloDash>Dashboard do usuário: {usuario.nome}</TituloDash>
       <InformacoesContainer>
         <DataContainer>
-            <Etiqueta>Selecione uma Data para Consumo</Etiqueta>
+            <Etiqueta>Selecione uma Data para registrar o consumo</Etiqueta>
             <input
                 type="date"
                 value={data}
@@ -87,13 +94,14 @@ function Dashboard() {
             />
         </DataContainer>
         <UsuariosInfo usuario={usuario} />
+        
+        <Texto>Selecione abaixo a quantidade de água para registrar o consumo.</Texto>
         <FormularioConsumo
                 id_usuario={id_usuario}
                 quantidadeAgua={quantidadeAgua}
                 setQuantidadeAgua={setQuantidadeAgua}
                 handleSubmit={handleSubmit}
         />
-        {/* <Botao onClick={irParaHistorico}>Ver Histórico</Botao> */}
       </InformacoesContainer>
     </AppContainer>
   );

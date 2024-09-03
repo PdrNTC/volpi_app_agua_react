@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Logo from "./Logo";
-import OpcoesHeader from "../OpcoesHeader";
 import { Link } from "react-router-dom";
 
 const HeaderContainer = styled.header`
@@ -16,7 +15,7 @@ function Header() {
              <Link to="/"> {/* Redirecionando para a home com a logo */}
                 <Logo />
             </Link>
-            <OpcoesHeader /> {/* componente OpcoesHeader */}
+           {/* <OpcoesHeader />  componente OpcoesHeader */}
         </HeaderContainer>
     );
 }

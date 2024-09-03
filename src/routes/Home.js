@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { getUsuarios } from '../services/dashboard';
+import Header from '../componentes/Header';
 
 const LoginContainer = styled.div`
     background-color: #F4EFE0;
@@ -51,7 +52,7 @@ const Button = styled.button`
     }
 `;
 
-const RegisterLink = styled.p`
+const RegistrarLink = styled.p`
     margin-top: 20px;
     cursor: pointer;
     color: #007bff;
@@ -85,6 +86,7 @@ function Home() {
 
     return (
         <LoginContainer>
+            <Header />
             <TituloHome>Bem vindo ao VOLPI - Water APP</TituloHome>
             <FormContainer onSubmit={handleSubmit}>
                 <Label>Informe seu username para logar</Label>
@@ -97,7 +99,7 @@ function Home() {
                 />
                 <Button type="submit">Login</Button>
             </FormContainer>
-            <RegisterLink onClick={() => navigate('/cadastrar')}>Registrar-se</RegisterLink>
+            <RegistrarLink onClick={() => navigate('/cadastrar')}>Registrar-se</RegistrarLink>
         </LoginContainer>
     );
 }

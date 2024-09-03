@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { getHistoricoUsuario } from "../../services/historico";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import Header from "../Header";
 
 const HistoricoContainer = styled.div`
+  background-color: #F4EFE0;
   width: 100%;
   max-width: 600px;
   margin: 0 auto;
@@ -25,6 +27,23 @@ const RegistroContainer = styled.div`
 
 const Separador = styled.hr`
   margin: 20px 0;
+`;
+
+const BotaoVoltar = styled.button`
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+  text-aling: center;
+  justify-content: center;
+
+  &:hover {
+    background-color: #0056b3;
+  }
 `;
 
 function HistoricoUsuario() {
@@ -49,8 +68,15 @@ function HistoricoUsuario() {
     return data.toISOString().split('T')[0];
   };
 
+  const navigate = useNavigate();
+
+  const voltarAoDashboard = () => {
+    navigate(`/dashboard/${id_usuario}`);
+  };
+
   return (
     <HistoricoContainer>
+      <Header />
       <Titulo>Histórico de Consumo de Água</Titulo>
       {historico.length > 0 ? (
         historico.map((registro, index) => (
@@ -67,6 +93,7 @@ function HistoricoUsuario() {
       ) : (
         <p>Nenhum histórico disponível no momento.</p>
       )}
+      <BotaoVoltar onClick={voltarAoDashboard}>Voltar para o Dashboard</BotaoVoltar>
     </HistoricoContainer>
   );
 }

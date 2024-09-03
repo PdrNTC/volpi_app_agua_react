@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import Formulario from "../componentes/Formulario";
+import Header from "../componentes/Header";
 
 const AppContainer = styled.div`
+  background-color: #F4EFE0;
   width: 100vw;
   height: 100vh;
 `
@@ -21,10 +23,11 @@ const TituloHome = styled.h2`
 function Cadastrar() {
   return (
     <AppContainer>
-      <FormCentraliza>
-        <TituloHome>Cadastrar novo usuário</TituloHome>
-        <Formulario />
-      </FormCentraliza>
+      <Header />
+        <FormCentraliza>
+          <TituloHome>Cadastrar novo usuário</TituloHome>
+          <Formulario />
+        </FormCentraliza>
     </AppContainer>
   );
 }
