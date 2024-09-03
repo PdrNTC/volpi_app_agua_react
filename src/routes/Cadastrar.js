@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Formulario from "./componentes/Formulario";
+import Formulario from "../componentes/Formulario";
 
 const AppContainer = styled.div`
   width: 100vw;
@@ -18,7 +18,7 @@ const TituloHome = styled.h2`
   color: #021526;
 `
 
-function App() {
+function Cadastrar() {
   return (
     <AppContainer>
       <FormCentraliza>
@@ -29,4 +29,4 @@ function App() {
   );
 }
 
-export default App;
+export default Cadastrar;

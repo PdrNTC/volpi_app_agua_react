@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getDadosUsuario, postConsumoAgua } from "../services/dashboard";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import UsuariosInfo from "../componentes/UsuariosInfo";
 import FormularioConsumo from "../componentes/FormularioConsumo";
 
@@ -34,12 +34,13 @@ const DataContainer = styled.div`
     justify-content: center;
 `
 
+
 function Dashboard() {
   const { id_usuario } = useParams(); // Pegando o ID na URL
   const [usuario, setUsuario] = useState({});
   const [data, setData] = useState(new Date().toISOString().split("T")[0]); // Data padrão é a atual
   const [quantidadeAgua, setQuantidadeAgua] = useState(0);
-  const navigate = useNavigate(); //Hook de navegação
+  // const navigate = useNavigate(); //Hook de navegação
 
   const normalizarData = (dataString) => {
     const data = new Date(dataString);
@@ -69,9 +70,9 @@ function Dashboard() {
     }
   };
 
-  const irParaHistorico = () => {
-    navigate(`/historico/${id_usuario}`);
-  };
+  // const irParaHistorico = () => {
+  //   navigate(`/historico/${id_usuario}`);
+  // };
 
   return (
     <AppContainer>
@@ -92,7 +93,7 @@ function Dashboard() {
                 setQuantidadeAgua={setQuantidadeAgua}
                 handleSubmit={handleSubmit}
         />
-        <button onClick={irParaHistorico}>Ver Histórico</button>
+        {/* <Botao onClick={irParaHistorico}>Ver Histórico</Botao> */}
       </InformacoesContainer>
     </AppContainer>
   );

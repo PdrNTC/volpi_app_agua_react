@@ -1,8 +1,7 @@
-import styled from "styled-components"
+import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { getHistoricoUsuario } from "../../services/historico";
 import { useParams } from "react-router-dom";
-
 
 const HistoricoContainer = styled.div`
   width: 100%;
@@ -28,51 +27,48 @@ const Separador = styled.hr`
   margin: 20px 0;
 `;
 
-
 function HistoricoUsuario() {
-    const [historico, setHistorico] = useState([]);
-    const { id_usuario } = useParams(); // Pegando o ID no endpoint
-    
-    useEffect(() => {
-        async function fetchHistorico() {
-            try {
-                const dadosHistorico = await getHistoricoUsuario(id_usuario);
-                setHistorico(dadosHistorico);
-            } catch (error) {
-                alert("Erro ao obter os dados de histórico.");
-            }
-        }
+  const [historico, setHistorico] = useState([]);
+  const { id_usuario } = useParams(); // Pegando o ID no endpoint
 
-        fetchHistorico();
-    }, [id_usuario]); // 'id_usuario' é a única dependência real
+  useEffect(() => {
+    async function fetchHistorico() {
+      try {
+        const dadosHistorico = await getHistoricoUsuario(id_usuario);
+        setHistorico(dadosHistorico);
+      } catch (error) {
+        alert("Erro ao obter os dados de histórico.");
+      }
+    }
 
-    const formatarData = (dataString) => {
-        const data = new Date(dataString);
-        return data.toISOString().split('T')[0];
-    };
+    fetchHistorico();
+  }, [id_usuario]); // 'id_usuario' é a única dependência real
 
-    return (
-        <HistoricoContainer>
-            <Titulo>Histórico de Consumo de Água</Titulo>
-            { historico.length > 0 ? (
-                historico.map((registro, index) => (
-                    <RegistroContainer key={index}>
-                        <p><strong>Nome: </strong> {registro.nome_usuario}</p>
-                        <p><strong>Data: </strong> {formatarData(registro.data)}</p>
-                        <p><strong>Meta Diária: </strong> {registro.meta_diaria} ml</p>
-                        <p><strong>Quantidade de Água Ingerida: </strong> {registro.qtd_agua} ml</p>
-                        <p><strong>Quantidade de Água que Falta: </strong> {registro.quantidade_faltante} ml</p>
-                        <p><strong>Chegou na meta hoje?</strong> {registro.quantidade_faltante <= 0 ? "SIM" : "NÃO"} ml</p>
-                        
-                        <Separador/>
-                    </RegistroContainer>
-                ))
-            ) : (
-                <p>Nenhum histórico disponível no momento.</p>
-            )}
-        </HistoricoContainer>
-    );
+  const formatarData = (dataString) => {
+    const data = new Date(dataString);
+    return data.toISOString().split('T')[0];
+  };
+
+  return (
+    <HistoricoContainer>
+      <Titulo>Histórico de Consumo de Água</Titulo>
+      {historico.length > 0 ? (
+        historico.map((registro, index) => (
+          <RegistroContainer key={index}>
+            <p><strong>Nome: </strong> {registro.nome_usuario}</p>
+            <p><strong>Peso em kg: </strong> {registro.peso_usuario}</p>
+            <p><strong>Data: </strong> {formatarData(registro.data)}</p>
+            <p><strong>Meta Diária: </strong> {registro.meta_diaria} ml</p>
+            <p><strong>Quantidade Total de Água Ingerida: </strong> {registro.total_agua} ml</p>
+            <p><strong>Chegou na meta hoje: </strong> {registro.atingiu_meta ? "SIM" : "NÃO"}</p>
+            <Separador />
+          </RegistroContainer>
+        ))
+      ) : (
+        <p>Nenhum histórico disponível no momento.</p>
+      )}
+    </HistoricoContainer>
+  );
 }
-
 
 export default HistoricoUsuario;
