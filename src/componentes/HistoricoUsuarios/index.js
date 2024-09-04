@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getHistoricoUsuario } from "../../services/historico";
 import { useParams, useNavigate } from "react-router-dom";
 import Header from "../Header";
+import axios from "axios";
 
 const HistoricoContainer = styled.div`
   background-color: #F4EFE0;
@@ -46,9 +47,26 @@ const BotaoVoltar = styled.button`
   }
 `;
 
+// Botão Gerar PDF
+const BotaoGerarPDF = styled.button`
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-left: 20px;
+
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
+
 function HistoricoUsuario() {
   const [historico, setHistorico] = useState([]);
   const { id_usuario } = useParams(); // Pegando o ID no endpoint
+  const [gerandoPDF, setGerandoPDF] = useState(false);
 
   useEffect(() => {
     async function fetchHistorico() {
@@ -74,6 +92,20 @@ function HistoricoUsuario() {
     navigate(`/dashboard/${id_usuario}`);
   };
 
+  const gerarPDF = async () => {
+    setGerandoPDF(true);
+    try {
+      await axios.post(`http://127.0.0.1:8000/gerar-pdf/`, {
+        usuario_id: id_usuario // enviando ID do usuario pegado pelo useParams();
+      })
+      alert("PDF sendo gerado, você será notificado quando estiver pronto.")
+    } catch (error) {
+      console.error("Erro ao gerar PDF: ", error)
+      alert("Ocorreu um erro ao gerar o PDF, verifique o console.")
+    }
+    setGerandoPDF(false)
+  }
+
   return (
     <HistoricoContainer>
       <Header />
@@ -94,6 +126,12 @@ function HistoricoUsuario() {
         <p>Nenhum histórico disponível no momento.</p>
       )}
       <BotaoVoltar onClick={voltarAoDashboard}>Voltar para o Dashboard</BotaoVoltar>
+      <BotaoGerarPDF 
+        onClick={gerarPDF} 
+        disable={gerandoPDF}
+      > {gerandoPDF ? "Gerando PDF..." : "Gerar PDF"}
+
+      </BotaoGerarPDF>
     </HistoricoContainer>
   );
 }
