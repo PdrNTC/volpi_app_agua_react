@@ -99,6 +99,7 @@ function Dashboard() {
           <InputData
                 type="date"
                 value={data}
+                max={new Date().toISOString().split("T")[0]} //Limitando a data máxima a dt atual //
                 onChange={(e) => setData(e.target.value)}
           />
         </DataContainer>
