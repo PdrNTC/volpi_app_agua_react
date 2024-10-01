@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+ # Volpi water APP 💧
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Frontend do app para Lembrar de Beber Água, proporciona uma experiência intuitiva e amigável. A interface permite aos usuários registrar o consumo diário de água ingerida, visualizar metas de acordo com o peso corporal e gerar relatórios dos consumos realizados por período.
+ 
+***➡ Para acessar o Back End dessa aplicação: [Clique aqui](https://github.com/PdrNTC/volpi_api_agua)***
 
-## Available Scripts
+<br />
 
-In the project directory, you can run:
+* ***Apresentação do uso da API em FrontEnd*** [Clique aqui]() 
 
-### `npm start`
+<br />
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Funcionalidades Principais:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+👤 Cadastro do Usuário (Tela 1):
+- Implementei uma rota para que os usuários possam se cadastrar fornecendo seu nome, email, senha e peso em Kg.
 
-### `npm test`
+🔑 Login do Usuário (Tela 2):
+- Implementei um sistema de login seguro com email e senha.
+- A API retorna tokens JWT após a autenticação bem-sucedida.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+📊 Registro e Visualização do Consumo de Água (Tela 3):
+- Desenvolvi funcionalidades que permitem aos usuários registrar a quantidade de água consumida.
+- Após o registro, a API fornece dados em tempo real sobre o consumo atual, quantidade restante para atingir a meta diária, e se a meta já foi alcançada.
 
-### `npm run build`
+💧 Histórico de Consumo (Tela 4):
+- Criei uma rota para que os usuários possam acessar o registro de dias anteriores.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+📐 Cálculo da Meta Diária:
+- A meta diária é calculada automaticamente com base no peso do usuário (em Kg) multiplicado por 35ml.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Ferramentas utilizadas 🛠 
+- React <img align="center" alt="React" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg">
+- TypeScript <img align="center" alt="TypeScript" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg">
+- VsCode <img align="center" alt="vscode" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg"> 
