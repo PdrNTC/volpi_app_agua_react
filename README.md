@@ -12,12 +12,11 @@ Frontend do app para Lembrar de Beber Água, proporciona uma experiência intuit
 
 ## Funcionalidades Principais:
 
-👤 Cadastro do Usuário (Tela 1):
-- Implementei uma rota para que os usuários possam se cadastrar fornecendo seu nome, email, senha e peso em Kg.
+🔑 Login do Usuário (Tela 1):
+- Implementei um sistema de login.
 
-🔑 Login do Usuário (Tela 2):
-- Implementei um sistema de login seguro com email e senha.
-- A API retorna tokens JWT após a autenticação bem-sucedida.
+👤 Cadastro do Usuário (Tela 2):
+- Implementei uma rota para que os usuários possam se cadastrar fornecendo seu nome, email e peso em Kg.
 
 📊 Registro e Visualização do Consumo de Água (Tela 3):
 - Desenvolvi funcionalidades que permitem aos usuários registrar a quantidade de água consumida.
@@ -25,6 +24,9 @@ Frontend do app para Lembrar de Beber Água, proporciona uma experiência intuit
 
 💧 Histórico de Consumo (Tela 4):
 - Criei uma rota para que os usuários possam acessar o registro de dias anteriores.
+
+📊 Relatório de consumos (tela 5):
+- O usuário pode exportar um relatório em PDF com os seus consumos realizados ao longo do tempo.
 
 📐 Cálculo da Meta Diária:
 - A meta diária é calculada automaticamente com base no peso do usuário (em Kg) multiplicado por 35ml.
