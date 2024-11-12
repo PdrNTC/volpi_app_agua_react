@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import logo from '../../../imgs/volpi_tech_logo.jpeg';
+import logo from '../../../imgs/garrafa_agua.png';
 
 const LogoContainer = styled.div`
     display: flex;
@@ -7,6 +7,8 @@ const LogoContainer = styled.div`
 `
 const LogoImagem = styled.img`
     margin-right: 10px;
+    width: 100px;
+    height: 100px;
 `
 
 function Logo() {

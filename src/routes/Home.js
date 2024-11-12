@@ -87,7 +87,7 @@ function Home() {
     return (
         <LoginContainer>
             <Header />
-            <TituloHome>Bem vindo ao VOLPI - Water APP</TituloHome>
+            <TituloHome>Bem vindo ao - Water APP</TituloHome>
             <FormContainer onSubmit={handleSubmit}>
                 <Label>Informe seu username para logar</Label>
                 <Input
